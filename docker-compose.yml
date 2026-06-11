@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tugas-akhir-pwf-app
+    container_name: tugas_akhir_pwf_app
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: 'false'
+      APP_KEY: ${APP_KEY}
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: tugas_akhir_pwf
+      DB_USERNAME: tugas_akhir_user
+      DB_PASSWORD: db_password_pwf
+      SESSION_DRIVER: database
+      CACHE_STORE: database
+      QUEUE_CONNECTION: database
+    volumes:
+      - app-storage:/var/www/html/storage
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: tugas_akhir_pwf_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: tugas_akhir_pwf
+      MYSQL_USER: tugas_akhir_user
+      MYSQL_PASSWORD: db_password_pwf
+      MYSQL_ROOT_PASSWORD: root_password_pwf
+    ports:
+      - "3308:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  app-storage:
+  db-data:

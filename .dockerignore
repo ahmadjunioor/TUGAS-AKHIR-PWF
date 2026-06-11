@@ -1,0 +1,17 @@
+.git
+.gitignore
+.editorconfig
+node_modules/
+vendor/
+npm-debug.log
+composer.lock
+package-lock.json
+.phpunit.result.cache
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+storage/logs/*
+phpunit.xml
+.env
+.env.testing
